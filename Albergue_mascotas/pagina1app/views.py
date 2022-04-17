@@ -107,7 +107,7 @@ def formulario_registro_mascota(request):
 
     if request.method == 'POST':
         #Si me enviaron datos, crear nuevo formulario con los datos enviados
-        formulario = Registro_mascota_Form(data=request.POST) #POST es un diccionario con todos los datos
+        formulario = Registro_mascota_Form(data=request.POST, files=request.FILES) #POST es un diccionario con todos los datos
 
         if formulario.is_valid(): #Validando
             formulario.save()
