@@ -61,7 +61,7 @@ class Solicitud_adopcion_Form(forms.ModelForm):
             'telefono': 'Teléfono',
             'domicilio': 'Domicilio',
             'id_mascota': 'ID de la mascota',
-            'razon': 'Raza de la adopción',
+            'razon': 'Razón de la adopción',
         }
 
 
