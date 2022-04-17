@@ -8,7 +8,8 @@ from django.core.paginator import Paginator
 from django.http import Http404
 from django.shortcuts import redirect, render
 from django.contrib.auth import authenticate, login
-
+from django.core.mail import send_mail
+from django.conf import settings
 # Create your views here.
 
 
@@ -81,6 +82,11 @@ def contacto(request):
 
     if request.method == 'POST':
         #Si me enviaron datos, crear nuevo formulario con los datos enviados
+        subject=request.POST["nombre"]
+        message=request.POST["mensaje"] + " " + request.POST["correo"]
+        email_from=settings.EMAIL_HOST_USER
+        recipient_list=["alberguemascotas93@gmail.com"]
+        send_mail(subject, message, email_from, recipient_list)
         formulario = ContactoForm(data=request.POST) #POST es un diccionario con todos los datos
 
         if formulario.is_valid(): #Validando
