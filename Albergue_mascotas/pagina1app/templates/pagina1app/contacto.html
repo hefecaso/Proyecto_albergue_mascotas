@@ -1,0 +1,58 @@
+<!-- Heredando de base -->
+{% extends "pagina1app/base.html" %} {% load static %} {% block content %}
+<header
+
+  style="background-color: white;"
+
+  <meta
+    http-equiv="content-type"
+    content="text/html; charset=windows-1252">
+  </meta>
+
+
+  {% load crispy_forms_tags %}
+
+  <div class="row">
+    <div class="col-12 col-md-6 offset-md-3">
+
+      <br>
+      <h2>Contacta con nosotros</h2>
+      <br>
+
+      <form class=" " action=" " method="post">
+
+
+
+        {% csrf_token %}
+
+        {{ form | crispy }}
+        
+        <br>
+
+        <div class="d-flex justify-content-end">
+          <input type="reset" class="btn btn-secondary" value="Cancelar">
+          &nbsp;
+          <button type="submit" id="btnEnviar" class="btn btn-primary">Enviar</button>
+        </div>
+
+
+      </form>
+      {{mensaje}}
+    </div>
+  </div>
+
+  <table id="tablacontacto">
+
+  </table>
+
+
+</header>
+
+
+{% endblock %}
+
+<!-- Referencias -->
+
+<!-- https://www.youtube.com/watch?v=90M4gunBRLs&t=174s&ab_channel=moisessepulveda -->
+
+<!-- method = "post" es para que los datos no aparezcan en la url por cuestiones de seguridad -->

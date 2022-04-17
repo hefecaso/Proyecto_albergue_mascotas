@@ -1,0 +1,86 @@
+<!-- Heredando de base -->
+
+<meta
+  http-equiv="content-type"
+  content="text/html; charset=utf-8">
+</meta>
+
+{% extends "pagina1app/base.html" %}     {% load static %}     {% block content %}
+
+<header
+  class="header"
+  style="background-color: white;">
+  <meta
+    http-equiv="X-UA-Compatible"
+    content="IE=edge">
+  </meta>
+
+  <meta
+    name="description"
+    content>
+  </meta>
+
+  <meta
+    name="author"
+    content>
+  </meta>
+
+  <title>New page</title>
+
+  <link
+    href="css/style.css"
+    rel="stylesheet">
+  </link>
+
+  <link
+    href="https://fonts.googleapis.com/css?family=Alatsi&display=swap"
+    rel="stylesheet">
+  </link>
+
+  <link
+    href="https://fonts.googleapis.com/css?family=Alfa+Slab+One&display=swap"
+    rel="stylesheet">
+  </link>
+
+  <link
+    href="https://fonts.googleapis.com/css?family=Capriola&display=swap"
+    rel="stylesheet">
+  </link>
+
+  <div style="text-align: center;">
+    <a
+      class="logo_link"
+      name="anchor">
+      <img
+        class="logo_img"
+        alt="encabezado"
+        src="../../static/Formulario_registro_mascota/image/que-prefiere-la-gente-perros-o-gatos.jpg"
+        style="width: 419px; height: 202px;"
+        title="encabezado"/>
+    </a>
+  </div>
+
+  {% load static %}
+
+  <p style="text-align: center;">
+    <a href="{% url 'Formulario registro' %}">
+      <button
+        name="Registrar_mascota"
+        value="Registrar_mascota">
+        Registrar
+      </button>
+    </a>
+  </p>
+
+  <p style="text-align: center;">
+    <a href="{% url 'Formulario adopcion' %}">
+      <button
+        name="Adoptar_mascota"
+        value="Adoptar_mascota">
+        Adoptar
+      </button>
+    </a>
+  </p>
+
+  {% endblock %}
+</header>
