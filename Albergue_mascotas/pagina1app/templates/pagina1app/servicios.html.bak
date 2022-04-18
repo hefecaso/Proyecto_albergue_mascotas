@@ -49,14 +49,14 @@
 
         Donativos con tarjeta de crédito/debito, y PayPal.
       </div>
+      
 
       <div style="text-align: center;"><br/></div>
 
       <div style="text-align: center;">
         <img
           alt="{% static 'pagina1app/img/Imagen_mascotas_serivicios' %}"
-          src="{% static 'pagina1app/img/animales.jpg' %}"
-          style="width: 633px; height: 290px;"/>
+          src="{% static 'pagina1app/img/animales.jpg' %}"/>
       </div>
     </div>
 
