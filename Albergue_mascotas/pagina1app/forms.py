@@ -21,7 +21,8 @@ class Registro_mascota_Form(forms.ModelForm):
         #Asegurarse que los siguientes campos estén en el modelo, aparecera en el orden escrito
         #fields = ["nombre", "correo", "tipo_consulta", "mensaje", "avisos"]
         #Otra opción, para que aparezca en el orden que tiene en modelo.py podríamos escribir lo siguiente:
-        fields = [
+        fields = '__all__'
+        '''[
         'id_mascota',
         'nombre_mascota',
         'sexo_mascota',
@@ -30,7 +31,7 @@ class Registro_mascota_Form(forms.ModelForm):
         'fecha_vacuna_mascota',
         'raza_mascota',
         'vacunas_mascota',
-        ]
+        ]'''
 
         labels ={
             'id_mascota': 'ID de la mascota #DDMMAAAAK',
@@ -39,6 +40,7 @@ class Registro_mascota_Form(forms.ModelForm):
             'edad_mascota': 'Edad de la mascota',
             'fecha_rescate_mascota': 'Fecha de rescate (DD/MM/AAAA)',
             'fecha_vacuna_mascota': 'Fecha de vacunación (DD/MM/AAAA)',
+            'foto_mascota':'Foto de la mascota',
             'raza_mascota': 'Raza de la mascota',
             'vacunas_mascota': 'Vacunas de la mascota',
         }
