@@ -1,1 +1,41 @@
-<h1 style="text-align: center;">Ma</h1>
+<!-- Heredando de base -->
+{% extends "pagina1app/base.html" %} {% load static %} {% block content %}
+<header
+
+  style="background-color: white;"
+
+  <meta
+    http-equiv="content-type"
+    content="text/html; charset=windows-1252">
+  </meta>
+
+
+<h2>¡Adoptanos!</h2>
+<div class="registro">
+    {% for p in registro %}
+    <div class="Registro_mascota">
+
+        <div class="contenedor_registro">
+            {% if p.imagen %}
+            <img src="{{ p.imagen.url }}" alt="imagen mascota">
+            {% endif %}
+            <div class="informacion">
+              <h5>{{ p.id_mascota}}</h5>
+              <h5>{{ p.nombre_mascota | capfirst }}</h5>
+              <h5>{{ p.raza_mascota | capfirst }}</h5>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+</header>
+
+
+{% endblock %}
+
+<!-- Referencias -->
+
+<!-- https://www.youtube.com/watch?v=90M4gunBRLs&t=174s&ab_channel=moisessepulveda -->
+
+<!-- method = "post" es para que los datos no aparezcan en la url por cuestiones de seguridad -->

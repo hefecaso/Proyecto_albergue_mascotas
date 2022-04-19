@@ -11,6 +11,7 @@ from django.contrib.auth import authenticate, login
 from django.core.mail import send_mail
 from django.conf import settings
 # Create your views here.
+from .models import Registro_mascota
 
 
 def home(request):
@@ -22,7 +23,11 @@ def servicios(request):
 
 
 def albergue(request):
-    return render(request, "pagina1app/albergue.html")
+    registro = Registro_mascota.objects.all()
+    data = {
+        'registro': registro
+    }
+    return render(request, "pagina1app/albergue.html",data)
 
 
 '''
