@@ -1,5 +1,5 @@
-multiselectfield
-datetime
-pillow
+django-multiselectfield
+DateTime
+Pillow
 ntpath
 django-phonenumber-field
