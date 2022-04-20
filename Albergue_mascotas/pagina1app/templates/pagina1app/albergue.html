@@ -1,44 +1,48 @@
 <!-- Heredando de base -->
+
 {% extends "pagina1app/base.html" %} {% load static %} {% block content %}
+
 <header
-
   style="background-color: white;"
-
   <meta
-    http-equiv="content-type"
-    content="text/html; charset=windows-1252">
-  </meta>
-
-
+  http-equiv="content-type"
+  content="text/html; charset=windows-1252">
   <h2>¡Adoptanos!</h2>
 
-
-
-
   <div class="registro">
-      {% for p in registro %}
-      <div class="Registro_mascota">
+    {% for p in registro %}
 
-          <div class="contenedor_registro">
-              {% if p.foto_mascota %}
-              <img src="{{ p.foto_mascota.url }}" alt="foto_mascota" height="30%">
-              <!--<img src="{{ p.foto_mascota.url }}" alt="foto_mascota" width="20%" height="20%">-->
-              {% endif %}
-              <div class="informacion">
-                ID de la mascota: <h5>{{ p.id_mascota}}</h5>
-              Nombre: <h5>{{ p.nombre_mascota | capfirst }}</h5>
-              Raza:  <h5>{{ p.raza_mascota | capfirst }}</h5>
-              </div>
-          </div>
+    <div class="Registro_mascota">
+      <div class="contenedor_registro">
+        {% if p.foto_mascota %}
+
+        <img
+          alt="foto_mascota"
+          src="{{ p.foto_mascota.url }}"
+          height="30%"/>
+        <!-- <img src="{{ p.foto_mascota.url }}" alt="foto_mascota" width="20%" height="20%"> -->
+
+        {% endif %}
+
+        <div class="informacion">
+          ID de la mascota:
+
+          <h5>{{ p.id_mascota}}</h5>
+
+          Nombre:
+
+          <h5>{{ p.nombre_mascota | capfirst }}</h5>
+
+          Raza:
+
+          <h5>{{ p.raza_mascota | capfirst }}</h5>
+        </div>
       </div>
-      {% endfor %}
+    </div>
+
+    {% endfor %}
   </div>
-
-
-
-
 </header>
-
 
 {% endblock %}
 
