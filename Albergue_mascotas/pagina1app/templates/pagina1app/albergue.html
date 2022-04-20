@@ -10,24 +10,32 @@
   </meta>
 
 
-<h2>¡Adoptanos!</h2>
-<div class="registro">
-    {% for p in registro %}
-    <div class="Registro_mascota">
+  <h2>¡Adoptanos!</h2>
 
-        <div class="contenedor_registro">
-            {% if p.imagen %}
-            <img src="{{ p.imagen.url }}" alt="foto_mascota">
-            {% endif %}
-            <div class="informacion">
-              <h5>{{ p.id_mascota}}</h5>
-              <h5>{{ p.nombre_mascota | capfirst }}</h5>
-              <h5>{{ p.raza_mascota | capfirst }}</h5>
-            </div>
-        </div>
-    </div>
-    {% endfor %}
-</div>
+
+
+
+  <div class="registro">
+      {% for p in registro %}
+      <div class="Registro_mascota">
+
+          <div class="contenedor_registro">
+              {% if p.foto_mascota %}
+              <img src="{{ p.foto_mascota.url }}" alt="foto_mascota" height="30%">
+              <!--<img src="{{ p.foto_mascota.url }}" alt="foto_mascota" width="20%" height="20%">-->
+              {% endif %}
+              <div class="informacion">
+                ID de la mascota: <h5>{{ p.id_mascota}}</h5>
+              Nombre: <h5>{{ p.nombre_mascota | capfirst }}</h5>
+              Raza:  <h5>{{ p.raza_mascota | capfirst }}</h5>
+              </div>
+          </div>
+      </div>
+      {% endfor %}
+  </div>
+
+
+
 
 </header>
 
