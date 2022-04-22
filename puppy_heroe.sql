@@ -407,7 +407,7 @@ CREATE TABLE public.pagina1app_registro_mascota (
     edad_mascota integer NOT NULL,
     fecha_rescate_mascota date NOT NULL,
     fecha_vacuna_mascota date NOT NULL,
-    foto_mascota character varying(100) NOT NULL,
+    foto_mascota character varying(100),
     raza_mascota character varying(100) NOT NULL,
     vacunas_mascota character varying(60) NOT NULL,
     CONSTRAINT pagina1app_registro_mascota_edad_mascota_check CHECK ((edad_mascota >= 0)),
@@ -416,6 +416,49 @@ CREATE TABLE public.pagina1app_registro_mascota (
 
 
 ALTER TABLE public.pagina1app_registro_mascota OWNER TO postgres;
+
+--
+-- Name: pagina1app_solicitud_adopcion; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.pagina1app_solicitud_adopcion (
+    id bigint NOT NULL,
+    nombres character varying(100) NOT NULL,
+    apellidos character varying(100) NOT NULL,
+    edad integer NOT NULL,
+    correo character varying(254) NOT NULL,
+    telefono integer NOT NULL,
+    domicilio character varying(1000) NOT NULL,
+    id_mascota integer NOT NULL,
+    razon text NOT NULL,
+    CONSTRAINT pagina1app_solicitud_adopcion_edad_check CHECK ((edad >= 0)),
+    CONSTRAINT pagina1app_solicitud_adopcion_id_mascota_check CHECK ((id_mascota >= 0)),
+    CONSTRAINT pagina1app_solicitud_adopcion_telefono_check CHECK ((telefono >= 0))
+);
+
+
+ALTER TABLE public.pagina1app_solicitud_adopcion OWNER TO postgres;
+
+--
+-- Name: pagina1app_solicitud_adopcion_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.pagina1app_solicitud_adopcion_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.pagina1app_solicitud_adopcion_id_seq OWNER TO postgres;
+
+--
+-- Name: pagina1app_solicitud_adopcion_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.pagina1app_solicitud_adopcion_id_seq OWNED BY public.pagina1app_solicitud_adopcion.id;
+
 
 --
 -- Name: auth_group id; Type: DEFAULT; Schema: public; Owner: postgres
@@ -488,6 +531,13 @@ ALTER TABLE ONLY public.pagina1app_contacto ALTER COLUMN id SET DEFAULT nextval(
 
 
 --
+-- Name: pagina1app_solicitud_adopcion id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.pagina1app_solicitud_adopcion ALTER COLUMN id SET DEFAULT nextval('public.pagina1app_solicitud_adopcion_id_seq'::regclass);
+
+
+--
 -- Data for Name: auth_group; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -540,6 +590,10 @@ COPY public.auth_permission (id, name, content_type_id, codename) FROM stdin;
 30	Can change registro_mascota	8	change_registro_mascota
 31	Can delete registro_mascota	8	delete_registro_mascota
 32	Can view registro_mascota	8	view_registro_mascota
+33	Can add solicitud_adopcion	9	add_solicitud_adopcion
+34	Can change solicitud_adopcion	9	change_solicitud_adopcion
+35	Can delete solicitud_adopcion	9	delete_solicitud_adopcion
+36	Can view solicitud_adopcion	9	view_solicitud_adopcion
 \.
 
 
@@ -548,8 +602,7 @@ COPY public.auth_permission (id, name, content_type_id, codename) FROM stdin;
 --
 
 COPY public.auth_user (id, password, last_login, is_superuser, username, first_name, last_name, email, is_staff, is_active, date_joined) FROM stdin;
-2	pbkdf2_sha256$320000$vO5h9EdBUhnlYXIULAMUHE$XFyt42zAp6nqrPbAkO8cC+qMBdCD6tZy0E9qo0wfx9g=	2022-04-12 12:53:21.304408-06	f	hefecaso				f	t	2022-04-12 12:53:20.774583-06
-1	pbkdf2_sha256$320000$oaduq8BfqgsDaalVjpYJin$0s2xWmA7Ew4dL8fxPoHnO96QUMhvPcb1PXSyHp5O6ck=	2022-04-12 12:53:37.815586-06	t	admin			admin@admin.com	t	t	2022-04-12 12:52:44.4676-06
+1	pbkdf2_sha256$320000$ZhhzUEXAJE0ajyAFn7unvj$2FZas+ZzysHpdR+IlKAYzzhuYdo+LTVNweMjTw+Lyrw=	2022-04-21 18:36:56.447984-06	t	admin			admin@admin.com	t	t	2022-04-17 02:52:31.54935-06
 \.
 
 
@@ -574,6 +627,20 @@ COPY public.auth_user_user_permissions (id, user_id, permission_id) FROM stdin;
 --
 
 COPY public.django_admin_log (id, action_time, object_id, object_repr, action_flag, change_message, content_type_id, user_id) FROM stdin;
+1	2022-04-17 02:53:19.548804-06	1234567897	Chenike	2	[{"changed": {"fields": ["Foto mascota"]}}]	8	1
+2	2022-04-17 03:00:44.989799-06	1234567896	Dasha	2	[{"changed": {"fields": ["Foto mascota"]}}]	8	1
+3	2022-04-19 01:05:30.48539-06	1234567897	Chenike	3		8	1
+4	2022-04-19 01:05:30.982349-06	1234567896	Dasha	3		8	1
+5	2022-04-19 01:05:30.99984-06	170420222	Oso	3		8	1
+6	2022-04-19 01:05:31.016616-06	170420221	Yoshi	3		8	1
+7	2022-04-19 01:05:31.034357-06	123456999	Chui	3		8	1
+8	2022-04-19 01:05:31.050943-06	123456989	Chenike	3		8	1
+9	2022-04-19 01:05:31.069537-06	123456789	Dasha	3		8	1
+10	2022-04-19 01:05:31.086525-06	123456555	Laika	3		8	1
+11	2022-04-19 01:05:31.120774-06	123456444	Laika Yoshi	3		8	1
+12	2022-04-19 01:05:31.137895-06	123456333	Laika Dasha	3		8	1
+13	2022-04-19 01:05:31.155502-06	123456222	Oso	3		8	1
+14	2022-04-19 01:05:31.171808-06	123456221	Oso	3		8	1
 \.
 
 
@@ -590,6 +657,7 @@ COPY public.django_content_type (id, app_label, model) FROM stdin;
 6	sessions	session
 7	pagina1app	contacto
 8	pagina1app	registro_mascota
+9	pagina1app	solicitud_adopcion
 \.
 
 
@@ -598,25 +666,25 @@ COPY public.django_content_type (id, app_label, model) FROM stdin;
 --
 
 COPY public.django_migrations (id, app, name, applied) FROM stdin;
-1	contenttypes	0001_initial	2022-04-12 12:48:00.111641-06
-2	auth	0001_initial	2022-04-12 12:48:01.629993-06
-3	admin	0001_initial	2022-04-12 12:48:02.051404-06
-4	admin	0002_logentry_remove_auto_add	2022-04-12 12:48:02.117979-06
-5	admin	0003_logentry_add_action_flag_choices	2022-04-12 12:48:02.177921-06
-6	contenttypes	0002_remove_content_type_name	2022-04-12 12:48:02.279243-06
-7	auth	0002_alter_permission_name_max_length	2022-04-12 12:48:02.315843-06
-8	auth	0003_alter_user_email_max_length	2022-04-12 12:48:02.354423-06
-9	auth	0004_alter_user_username_opts	2022-04-12 12:48:02.380039-06
-10	auth	0005_alter_user_last_login_null	2022-04-12 12:48:02.409641-06
-11	auth	0006_require_contenttypes_0002	2022-04-12 12:48:02.43886-06
-12	auth	0007_alter_validators_add_error_messages	2022-04-12 12:48:02.503175-06
-13	auth	0008_alter_user_username_max_length	2022-04-12 12:48:02.606847-06
-14	auth	0009_alter_user_last_name_max_length	2022-04-12 12:48:02.643707-06
-15	auth	0010_alter_group_name_max_length	2022-04-12 12:48:02.682777-06
-16	auth	0011_update_proxy_permissions	2022-04-12 12:48:02.70763-06
-17	auth	0012_alter_user_first_name_max_length	2022-04-12 12:48:02.735317-06
-18	pagina1app	0001_initial	2022-04-12 12:48:03.058967-06
-19	sessions	0001_initial	2022-04-12 12:48:03.768099-06
+1	contenttypes	0001_initial	2022-04-17 02:43:50.33096-06
+2	auth	0001_initial	2022-04-17 02:43:51.53663-06
+3	admin	0001_initial	2022-04-17 02:43:51.838499-06
+4	admin	0002_logentry_remove_auto_add	2022-04-17 02:43:51.901247-06
+5	admin	0003_logentry_add_action_flag_choices	2022-04-17 02:43:51.973012-06
+6	contenttypes	0002_remove_content_type_name	2022-04-17 02:43:52.043342-06
+7	auth	0002_alter_permission_name_max_length	2022-04-17 02:43:52.109744-06
+8	auth	0003_alter_user_email_max_length	2022-04-17 02:43:52.159115-06
+9	auth	0004_alter_user_username_opts	2022-04-17 02:43:52.192411-06
+10	auth	0005_alter_user_last_login_null	2022-04-17 02:43:52.222988-06
+11	auth	0006_require_contenttypes_0002	2022-04-17 02:43:52.237606-06
+12	auth	0007_alter_validators_add_error_messages	2022-04-17 02:43:52.265133-06
+13	auth	0008_alter_user_username_max_length	2022-04-17 02:43:52.352702-06
+14	auth	0009_alter_user_last_name_max_length	2022-04-17 02:43:52.424279-06
+15	auth	0010_alter_group_name_max_length	2022-04-17 02:43:52.526654-06
+16	auth	0011_update_proxy_permissions	2022-04-17 02:43:52.583651-06
+17	auth	0012_alter_user_first_name_max_length	2022-04-17 02:43:52.626711-06
+18	pagina1app	0001_initial	2022-04-17 02:43:53.337997-06
+19	sessions	0001_initial	2022-04-17 02:43:53.658261-06
 \.
 
 
@@ -625,7 +693,7 @@ COPY public.django_migrations (id, app, name, applied) FROM stdin;
 --
 
 COPY public.django_session (session_key, session_data, expire_date) FROM stdin;
-qdl3b22638qpdmb946nvt7t8o74fsaeo	.eJxVjEEOgjAURO_StWlaoOXXpXvP0Px2fgU1kFBYGe-uJCx0O--9eanI2zrErcoSR6izsur0uyXOD5l2gDtPt1nneVqXMeld0Qet-jpDnpfD_TsYuA7fWtD2QDKBxFMGSSpofGMpW4FhS33hAgkAGzIudY7ZI7eh8Z0NnVPvDxqTOMk:1neLdx:-lzM_Hyj8bqE8mP5vR5jtTFSiN1qHQh3NWvpz5u_Orw	2022-04-26 12:53:37.833502-06
+683jgn4iuhb62sovjni7pa46dii2tr0c	.eJxVjDsOwjAQBe_iGlleZ_2jpOcMlj9rHEC2FCcV4u4QKQW0b2bei_mwrdVvgxY_Z3ZmwE6_WwzpQW0H-R7arfPU27rMke8KP-jg157peTncv4MaRv3WRtjJBp0ioXAGpUDIWhlXpHQWVBA2QhFIWkIpCNFpillNUpJxCCqx9wexqza2:1nhhIA:KcXroW-Xg55v0OMr4o4QIG_58wf5uDZnHC-PMnjp-z4	2022-05-05 18:36:58.704212-06
 \.
 
 
@@ -634,6 +702,8 @@ qdl3b22638qpdmb946nvt7t8o74fsaeo	.eJxVjEEOgjAURO_StWlaoOXXpXvP0Px2fgU1kFBYGe-uJC
 --
 
 COPY public.pagina1app_contacto (id, nombre, correo, tipo_consulta, mensaje, avisos) FROM stdin;
+1	Katy ixchely	hfcarrerasoto@yahoo.es	3	Probando el merge	t
+2	Katy ixchely	hfcarrerasoto@yahoo.es	3	Probando el merge	t
 \.
 
 
@@ -642,6 +712,19 @@ COPY public.pagina1app_contacto (id, nombre, correo, tipo_consulta, mensaje, avi
 --
 
 COPY public.pagina1app_registro_mascota (id_mascota, nombre_mascota, sexo_mascota, edad_mascota, fecha_rescate_mascota, fecha_vacuna_mascota, foto_mascota, raza_mascota, vacunas_mascota) FROM stdin;
+123456789	Oso	0	12	2022-04-12	2022-04-10	fotos_mascotas/samoyedo.jpg	Samoyedo	rabia,distemper,parainfluenza
+123456555	Amber	1	3	2022-04-12	2022-01-07	fotos_mascotas/hacker.png	Pitbull	rabia,parainfluenza
+123123123	Yoshi	0	12	2022-04-12	2022-01-07	fotos_mascotas/spiderman.png	Aracnido	rabia,distemper,parainfluenza
+\.
+
+
+--
+-- Data for Name: pagina1app_solicitud_adopcion; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.pagina1app_solicitud_adopcion (id, nombres, apellidos, edad, correo, telefono, domicilio, id_mascota, razon) FROM stdin;
+1	Héctor Fernando	Carrera Soto	25	hfcarrerasoto@yahoo.es	35568775	zona 18	123456787	Esta es una prueba
+2	Héctor Fernando Merge	Carrera Soto Merge	25	correo@merge.com	35568775	Lomas de lavarreda	123456785	Prueba después de unir ambas partes
 \.
 
 
@@ -663,7 +746,7 @@ SELECT pg_catalog.setval('public.auth_group_permissions_id_seq', 1, false);
 -- Name: auth_permission_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.auth_permission_id_seq', 32, true);
+SELECT pg_catalog.setval('public.auth_permission_id_seq', 36, true);
 
 
 --
@@ -677,7 +760,7 @@ SELECT pg_catalog.setval('public.auth_user_groups_id_seq', 1, false);
 -- Name: auth_user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.auth_user_id_seq', 2, true);
+SELECT pg_catalog.setval('public.auth_user_id_seq', 1, true);
 
 
 --
@@ -691,14 +774,14 @@ SELECT pg_catalog.setval('public.auth_user_user_permissions_id_seq', 1, false);
 -- Name: django_admin_log_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.django_admin_log_id_seq', 1, false);
+SELECT pg_catalog.setval('public.django_admin_log_id_seq', 14, true);
 
 
 --
 -- Name: django_content_type_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.django_content_type_id_seq', 8, true);
+SELECT pg_catalog.setval('public.django_content_type_id_seq', 9, true);
 
 
 --
@@ -712,7 +795,14 @@ SELECT pg_catalog.setval('public.django_migrations_id_seq', 19, true);
 -- Name: pagina1app_contacto_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.pagina1app_contacto_id_seq', 1, false);
+SELECT pg_catalog.setval('public.pagina1app_contacto_id_seq', 2, true);
+
+
+--
+-- Name: pagina1app_solicitud_adopcion_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.pagina1app_solicitud_adopcion_id_seq', 2, true);
 
 
 --
@@ -865,6 +955,14 @@ ALTER TABLE ONLY public.pagina1app_contacto
 
 ALTER TABLE ONLY public.pagina1app_registro_mascota
     ADD CONSTRAINT pagina1app_registro_mascota_pkey PRIMARY KEY (id_mascota);
+
+
+--
+-- Name: pagina1app_solicitud_adopcion pagina1app_solicitud_adopcion_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.pagina1app_solicitud_adopcion
+    ADD CONSTRAINT pagina1app_solicitud_adopcion_pkey PRIMARY KEY (id);
 
 
 --
