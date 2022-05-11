@@ -1,0 +1,93 @@
+====================================================================
+Migrate docker-compose -> Django
+
+
+sudo COMPOSE_HTTP_TIMEOUT=200 docker-compose run django_app python manage.py migrate
+
+Creating albergue_mascotas_django_app_run ... done
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/db/backends/base/base.py", line 244, in ensure_connection
+    self.connect()
+  File "/usr/local/lib/python3.8/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/db/backends/base/base.py", line 225, in connect
+    self.connection = self.get_new_connection(conn_params)
+  File "/usr/local/lib/python3.8/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/db/backends/postgresql/base.py", line 203, in get_new_connection
+    connection = Database.connect(**conn_params)
+  File "/usr/local/lib/python3.8/site-packages/psycopg2/__init__.py", line 126, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: could not translate host name "db_postgres" to address: Temporary failure in name resolution
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "manage.py", line 22, in <module>
+    main()
+  File "manage.py", line 18, in main
+    execute_from_command_line(sys.argv)
+  File "/usr/local/lib/python3.8/site-packages/django/core/management/__init__.py", line 446, in execute_from_command_line
+    utility.execute()
+  File "/usr/local/lib/python3.8/site-packages/django/core/management/__init__.py", line 440, in execute
+    self.fetch_command(subcommand).run_from_argv(self.argv)
+  File "/usr/local/lib/python3.8/site-packages/django/core/management/base.py", line 414, in run_from_argv
+    self.execute(*args, **cmd_options)
+  File "/usr/local/lib/python3.8/site-packages/django/core/management/base.py", line 460, in execute
+    output = self.handle(*args, **options)
+  File "/usr/local/lib/python3.8/site-packages/django/core/management/base.py", line 98, in wrapped
+    res = handle_func(*args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/core/management/commands/migrate.py", line 91, in handle
+    self.check(databases=[database])
+  File "/usr/local/lib/python3.8/site-packages/django/core/management/base.py", line 487, in check
+    all_issues = checks.run_checks(
+  File "/usr/local/lib/python3.8/site-packages/django/core/checks/registry.py", line 88, in run_checks
+    new_errors = check(app_configs=app_configs, databases=databases)
+  File "/usr/local/lib/python3.8/site-packages/django/core/checks/model_checks.py", line 36, in check_all_models
+    errors.extend(model.check(**kwargs))
+  File "/usr/local/lib/python3.8/site-packages/django/db/models/base.py", line 1461, in check
+    *cls._check_indexes(databases),
+  File "/usr/local/lib/python3.8/site-packages/django/db/models/base.py", line 1864, in _check_indexes
+    connection.features.supports_covering_indexes
+  File "/usr/local/lib/python3.8/site-packages/django/utils/functional.py", line 49, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+  File "/usr/local/lib/python3.8/site-packages/django/db/backends/postgresql/features.py", line 85, in is_postgresql_11
+    return self.connection.pg_version >= 110000
+  File "/usr/local/lib/python3.8/site-packages/django/utils/functional.py", line 49, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+  File "/usr/local/lib/python3.8/site-packages/django/db/backends/postgresql/base.py", line 354, in pg_version
+    with self.temporary_connection():
+  File "/usr/local/lib/python3.8/contextlib.py", line 113, in __enter__
+    return next(self.gen)
+  File "/usr/local/lib/python3.8/site-packages/django/db/backends/base/base.py", line 639, in temporary_connection
+    with self.cursor() as cursor:
+  File "/usr/local/lib/python3.8/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/db/backends/base/base.py", line 284, in cursor
+    return self._cursor()
+  File "/usr/local/lib/python3.8/site-packages/django/db/backends/base/base.py", line 260, in _cursor
+    self.ensure_connection()
+  File "/usr/local/lib/python3.8/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/db/backends/base/base.py", line 244, in ensure_connection
+    self.connect()
+  File "/usr/local/lib/python3.8/site-packages/django/db/utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/usr/local/lib/python3.8/site-packages/django/db/backends/base/base.py", line 244, in ensure_connection
+    self.connect()
+  File "/usr/local/lib/python3.8/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/db/backends/base/base.py", line 225, in connect
+    self.connection = self.get_new_connection(conn_params)
+  File "/usr/local/lib/python3.8/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/db/backends/postgresql/base.py", line 203, in get_new_connection
+    connection = Database.connect(**conn_params)
+  File "/usr/local/lib/python3.8/site-packages/psycopg2/__init__.py", line 126, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+django.db.utils.OperationalError: could not translate host name "db_postgres" to address: Temporary failure in name resolution
+
+ERROR: 1
+====================================================================
+

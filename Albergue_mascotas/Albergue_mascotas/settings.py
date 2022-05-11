@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -25,7 +26,15 @@ SECRET_KEY = 'django-insecure-h12850(gxnu#^12lv@z!^46%j#2uhi*#v_qg3uxe29(puvw5xs
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+#En desarrollo
+ALLOWED_HOSTS = ['*']
+
+CSRF_TRUSTED_ORIGINS = ['http://*.localhost:8000','https://*.127.0.0.1:8000']
+
+MESSAGE_STORAGE = "django.contrib.messages.storage.cookie.CookieStorage"
+
+#Lanzando
+#ALLOWED_HOSTS = ['url']
 
 
 # Application definition
@@ -41,7 +50,14 @@ INSTALLED_APPS = [
     'crispy_forms',
     'multiselectfield',
     'phonenumber_field',
+    #'admin_interface',
+    #'colorfield',
+    #'jet',
+    #'jet.dashboard',
+    'import_export',
 ]
+
+X_FRAME_OPTIONS = 'SAMEORIGIN'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -55,10 +71,11 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'Albergue_mascotas.urls'
 
+'''
 TEMPLATES = [
     {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'BACKEND': 'django.db.backends.postgresql',
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -70,6 +87,24 @@ TEMPLATES = [
         },
     },
 ]
+'''
+
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+            ],
+        },
+    },
+]
+
 
 WSGI_APPLICATION = 'Albergue_mascotas.wsgi.application'
 
@@ -98,6 +133,23 @@ DATABASES = {
         'DATABASE_PORT':'5432'
     }
 }
+
+
+#########################################
+#   Conectando a postgres para docker   #
+#########################################
+'''
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': os.environ.get('DB_NAME'),
+        'USER': os.environ.get('DB_USER'),
+        'PASSWORD': os.environ.get('DB_PASSWORD'),
+        'HOST': os.environ.get('DB_HOST'),
+    }
+}
+'''
+
 
 ##################################################################
 
@@ -136,6 +188,17 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
+#STATICFILES_DIRS =[BASE_DIR / "static"]
+
+'''
+#Statir_root para exportar e importar en archivos la base de validators
+
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+'''
+#Statir_root para exportar e importar en archivos la base de validators en docker
+
+STATIC_ROOT = '/code/static/'
 
 #configuracion de envio de correos
 EMAIL_BACKEND="django.core.mail.backends.smtp.EmailBackend"

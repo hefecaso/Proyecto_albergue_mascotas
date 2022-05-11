@@ -1,0 +1,41 @@
+version: "3"
+
+services:
+  db:
+    image: postgres:12.9
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+        - POSTGRES_PASSWORD=123456
+        - POSTGRES_USER=postgres
+        - POSTGRES_DB=puppy_hero
+    ports:
+      - 5432
+
+  django_app:
+    build: .
+    environment:
+      - DB_HOST=db
+      - DB_NAME=puppy_hero
+      - DB_USER=postgres
+      - DB_PASSWORD=123456
+    volumes:
+      - .:/code
+      - static:/code/static
+    depends_on:
+      - db
+
+  nginx:
+    image: nginx:1.18.0
+    ports:
+      - 8000:80
+    volumes:
+      - ./config/nginx/conf.d:/etc/nginx/conf.d
+      - static:/code/static
+    depends_on:
+      - django_app
+
+volumes:
+  .:
+  postgres_data:
+  static:

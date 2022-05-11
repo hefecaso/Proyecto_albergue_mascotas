@@ -47,7 +47,8 @@
               {% csrf_token %}               {{ form | crispy}}
 
               <a href="{% url 'Home' %}">Inicio</a> |
-              <a href="{% url 'Formulario Registro' %}">Registrarse</a>
+              <a href="{% url 'Formulario Registro' %}">Registrarse</a> |
+              <a href="{% url 'password_reset' %}">Olvidé mi contraseña</a>
 
               <input
                 class="btn btn-success float-right"

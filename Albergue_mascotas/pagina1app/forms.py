@@ -1,9 +1,13 @@
 from  django import forms
-from django.contrib.auth.forms import  UserCreationForm
+from django.contrib.auth.forms import UserCreationForm
 from .models import Contacto, Registro_mascota, Solicitud_adopcion
+from django.contrib.auth.models import User
 
 class CustomUserCreationForm(UserCreationForm):
-    pass
+    #Agregaremos campos que no aparecen por defecto, los que aparecen son usuario y contraseñas
+    class Meta:
+        model = User
+        fields = ["username", "first_name", "last_name", "email", "password1", "password2"]
 
 class ContactoForm(forms.ModelForm):
     #Tomamos datos desde el modelo definido en models

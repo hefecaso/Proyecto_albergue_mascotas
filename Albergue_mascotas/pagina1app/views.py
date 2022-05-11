@@ -13,6 +13,8 @@ from django.conf import settings
 # Create your views here.
 from .models import Registro_mascota
 
+#Importar y exportar datos
+from import_export import resources
 
 def home(request):
     return render(request, "pagina1app/home.html")
@@ -147,3 +149,16 @@ def formulario_adopcion(request):
             return redirect('Formulario adopcion')
 
     return render(request, "pagina1app/formulario_adopcion.html", data)
+
+'''
+#################################
+#   Importar y exportar datos   #
+#################################
+
+def export(request):
+    author_resource = resources.modelsresource_factory(model=Author)()
+    dataset = author_resource.export()
+    response = HttpResponse(dataset.csv, content_type='text/csv')
+    response['Content-Disposition'] = 'atachment; filename = "datos.csv"'
+    return response
+'''

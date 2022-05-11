@@ -1,5 +1,9 @@
 {% load static %}
 
+<!-- Título de la pestaña -->
+
+<title>Puppy Heroe</title>
+
 <!-- Bootstrap -->
 
 <link
@@ -80,7 +84,7 @@
             Albergue
           </a>
         </li>
-        
+
 
         <li class="nav-item px-lg-4">
           <a
@@ -90,6 +94,11 @@
           </a>
         </li>
 
+<!-- //////////////////////////////////////////////////// -->
+<!--Creando condicional login y logout-->
+
+      {% if user.is_authenticated %}
+
         <li class="nav-item px-lg-4">
           <a
             class="nav-link text-uppercase text-expanded"
@@ -98,9 +107,23 @@
           </a>
         </li>
 
-<!--Creando condicional login y logout-->
+          <!-- //////////////////////////////////////////////////// -->
+          <!--Si es superusuario-->
 
-        {% if user.is_authenticated %}
+          {% if user.is_superuser %}
+
+            <li class="nav-item px-lg-4">
+              <a
+                class="nav-link text-uppercase text-expanded"
+                href="{% url 'admin:index' %}">
+                Administrador
+              </a>
+            </li>
+
+          {% endif %}
+
+            <!-- //////////////////////////////////////////////////// -->
+
         <li class="nav-item px-lg-4">
           <a
             class="nav-link text-uppercase text-expanded"
@@ -116,7 +139,8 @@
             @{{ user.username }}
           </a>
         </li>
-        {% else %}
+
+      {% else %}
         <li class="nav-item px-lg-4">
           <a
             class="nav-link text-uppercase text-expanded"
@@ -124,7 +148,13 @@
             Iniciar sesión
           </a>
         </li>
-        {% endif %}
+
+      {% endif %}
+<!-- //////////////////////////////////////////////////// -->
+
+<!--Creando condicional login y logout-->
+
+
 <!-- //////////////////////////////////////////////////// -->
 
       </ul>

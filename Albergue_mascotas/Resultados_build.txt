@@ -1,0 +1,232 @@
+=================================================================================
+Subiendo con docker composer
+
+
+sudo COMPOSE_HTTP_TIMEOUT=200 docker-compose up --build
+
+Pulling db_postgress (postgres:12.9)...
+12.9: Pulling from library/postgres
+5eb5b503b376: Pull complete
+daa0467a6c48: Pull complete
+7cf625de49ef: Pull complete
+bb8afcc973b2: Pull complete
+c74bf40d29ee: Pull complete
+2ceaf201bb22: Pull complete
+1255f255c0eb: Pull complete
+d27501cd0cca: Pull complete
+4db357d46c78: Pull complete
+e650979b10f1: Pull complete
+1adff8f1353b: Pull complete
+83d894dc9c6c: Pull complete
+7d18bcc85c2e: Pull complete
+Digest: sha256:7984919d5b1d8bd22539118c671555b50cd3bb5fbc568645a49f61e5ab94b8f9
+Status: Downloaded newer image for postgres:12.9
+Building django_app
+Sending build context to Docker daemon  34.71MB
+Step 1/7 : FROM python:3.8
+3.8: Pulling from library/python
+6aefca2dc61d: Pull complete 
+967757d56527: Pull complete 
+c357e2c68cb3: Pull complete 
+c766e27afb21: Pull complete 
+32a180f5cf85: Pull complete 
+1535e3c1181a: Pull complete 
+169cbf91df16: Pull complete 
+48c02d5c52ac: Pull complete 
+e1494a0c0d5d: Pull complete 
+Digest: sha256:f732d55571549b427e12edb89d0951372e7b73c67f717ad0645bb0cda19fc05e
+Status: Downloaded newer image for python:3.8
+ ---> 63c8db7db039
+Step 2/7 : ENV PYTHONUNBUFFERED = 1
+ ---> Running in 4a8f25c50a94
+Removing intermediate container 4a8f25c50a94
+ ---> 06dc1186a9d9
+Step 3/7 : RUN mkdir /code
+ ---> Running in 3c46ca39d563
+Removing intermediate container 3c46ca39d563
+ ---> 345b544a45cb
+Step 4/7 : WORKDIR /code
+ ---> Running in 5210966a2173
+Removing intermediate container 5210966a2173
+ ---> df024604ff3d
+Step 5/7 : COPY . /code
+ ---> c04ddb1799b2
+Step 6/7 : RUN pip install -r librearias.txt
+ ---> Running in f1569248f7f9
+Collecting Django==4.0.3
+  Downloading Django-4.0.3-py3-none-any.whl (8.0 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 8.0/8.0 MB 306.8 kB/s eta 0:00:00
+Collecting django-multiselectfield==0.1.12
+  Downloading django_multiselectfield-0.1.12-py3-none-any.whl (15 kB)
+Collecting DateTime
+  Downloading DateTime-4.4-py2.py3-none-any.whl (51 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 51.7/51.7 KB 31.4 kB/s eta 0:00:00
+Collecting Pillow==7.0.0
+  Downloading Pillow-7.0.0-cp38-cp38-manylinux1_x86_64.whl (2.1 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.1/2.1 MB 232.1 kB/s eta 0:00:00
+Collecting django-admin-interface==0.19.0
+  Downloading django_admin_interface-0.19.0-py3-none-any.whl (228 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 228.7/228.7 KB 42.5 kB/s eta 0:00:00
+Collecting django-colorfield==0.6.3
+  Downloading django_colorfield-0.6.3-py3-none-any.whl (48 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 48.2/48.2 KB 370.1 kB/s eta 0:00:00
+Collecting django-crispy-forms==1.14.0
+  Downloading django_crispy_forms-1.14.0-py3-none-any.whl (133 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 133.3/133.3 KB 518.6 kB/s eta 0:00:00
+Collecting django-flat-responsive==2.0
+  Downloading django-flat-responsive-2.0.tar.gz (6.3 kB)
+  Preparing metadata (setup.py): started
+  Preparing metadata (setup.py): finished with status 'done'
+Collecting django-flat-theme==1.1.4
+  Downloading django-flat-theme-1.1.4.tar.gz (289 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 289.6/289.6 KB 560.5 kB/s eta 0:00:00
+  Preparing metadata (setup.py): started
+  Preparing metadata (setup.py): finished with status 'done'
+Collecting django-import-export==2.8.0
+  Downloading django_import_export-2.8.0-py3-none-any.whl (100 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 101.0/101.0 KB 19.0 kB/s eta 0:00:00
+Collecting django-jet==1.0.8
+  Downloading django-jet-1.0.8.tar.gz (829 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 829.5/829.5 KB 458.2 kB/s eta 0:00:00
+  Preparing metadata (setup.py): started
+  Preparing metadata (setup.py): finished with status 'done'
+Collecting django-phonenumber-field==6.1.0
+  Downloading django_phonenumber_field-6.1.0-py3-none-any.whl (63 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 63.3/63.3 KB 104.4 kB/s eta 0:00:00
+Collecting django-suit==0.2.28
+  Downloading django_suit-0.2.28-py2.py3-none-any.whl (402 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 402.6/402.6 KB 35.7 kB/s eta 0:00:00
+Collecting gunicorn==20.1.0
+  Downloading gunicorn-20.1.0-py3-none-any.whl (79 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 79.5/79.5 KB 11.3 kB/s eta 0:00:00
+Collecting psycopg2==2.8.4
+  Downloading psycopg2-2.8.4.tar.gz (377 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 377.9/377.9 KB 31.2 kB/s eta 0:00:00
+  Preparing metadata (setup.py): started
+  Preparing metadata (setup.py): finished with status 'done'
+Collecting backports.zoneinfo
+  Downloading backports.zoneinfo-0.2.1-cp38-cp38-manylinux1_x86_64.whl (74 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 74.0/74.0 KB 6.1 kB/s eta 0:00:00
+Collecting asgiref<4,>=3.4.1
+  Downloading asgiref-3.5.1-py3-none-any.whl (22 kB)
+Collecting sqlparse>=0.2.2
+  Downloading sqlparse-0.4.2-py3-none-any.whl (42 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 42.3/42.3 KB 7.1 kB/s eta 0:00:00
+Collecting six<2.0.0,>=1.9.0
+  Downloading six-1.16.0-py2.py3-none-any.whl (11 kB)
+Collecting diff-match-patch
+  Downloading diff_match_patch-20200713-py3-none-any.whl (61 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 61.6/61.6 KB 11.2 kB/s eta 0:00:00
+Collecting tablib[html,ods,xls,xlsx,yaml]>=3.0.0
+  Downloading tablib-3.2.1-py3-none-any.whl (48 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 48.7/48.7 KB 12.7 kB/s eta 0:00:00
+Requirement already satisfied: setuptools>=3.0 in /usr/local/lib/python3.8/site-packages (from gunicorn==20.1.0->-r librearias.txt (line 15)) (57.5.0)
+Collecting zope.interface
+  Downloading zope.interface-5.4.0-cp38-cp38-manylinux2010_x86_64.whl (259 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 259.2/259.2 KB 41.8 kB/s eta 0:00:00
+Collecting pytz
+  Downloading pytz-2022.1-py2.py3-none-any.whl (503 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 503.5/503.5 KB 36.5 kB/s eta 0:00:00
+Collecting odfpy
+  Downloading odfpy-1.4.1.tar.gz (717 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 717.0/717.0 KB 29.3 kB/s eta 0:00:00
+  Preparing metadata (setup.py): started
+  Preparing metadata (setup.py): finished with status 'done'
+Collecting xlrd
+  Downloading xlrd-2.0.1-py2.py3-none-any.whl (96 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 96.5/96.5 KB 11.3 kB/s eta 0:00:00
+Collecting xlwt
+  Downloading xlwt-1.3.0-py2.py3-none-any.whl (99 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100.0/100.0 KB 12.5 kB/s eta 0:00:00
+Collecting openpyxl>=2.6.0
+  Downloading openpyxl-3.0.9-py2.py3-none-any.whl (242 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 242.2/242.2 KB 10.7 kB/s eta 0:00:00
+Collecting markuppy
+  Downloading MarkupPy-1.14.tar.gz (6.8 kB)
+  Preparing metadata (setup.py): started
+  Preparing metadata (setup.py): finished with status 'done'
+WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ReadTimeoutError("HTTPSConnectionPool(host='pypi.org', port=443): Read timed out. (read timeout=15)")': /simple/pyyaml/
+Collecting pyyaml
+  Downloading PyYAML-6.0-cp38-cp38-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_12_x86_64.manylinux2010_x86_64.whl (701 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 701.2/701.2 KB 7.3 kB/s eta 0:00:00
+Collecting et-xmlfile
+  Downloading et_xmlfile-1.1.0-py3-none-any.whl (4.7 kB)
+Collecting defusedxml
+  Downloading defusedxml-0.7.1-py2.py3-none-any.whl (25 kB)
+Building wheels for collected packages: django-flat-responsive, django-flat-theme, django-jet, psycopg2, markuppy, odfpy
+  Building wheel for django-flat-responsive (setup.py): started
+  Building wheel for django-flat-responsive (setup.py): finished with status 'done'
+  Created wheel for django-flat-responsive: filename=django_flat_responsive-2.0-py3-none-any.whl size=6509 sha256=0b138151729b7c32fd14f35c589d07d013162117363e02db583d0100173acdb8
+  Stored in directory: /root/.cache/pip/wheels/21/17/5a/1b85cf7576a8b57d6b44f2b022d91d27208f16e0bd3c78d191
+  Building wheel for django-flat-theme (setup.py): started
+  Building wheel for django-flat-theme (setup.py): finished with status 'done'
+  Created wheel for django-flat-theme: filename=django_flat_theme-1.1.4-py3-none-any.whl size=309016 sha256=9d95fc110a6584342b66e6050ed1c767e08fbabdb271c04bf99d5e99369f9511
+  Stored in directory: /root/.cache/pip/wheels/51/f3/00/62348779a6fa769a35b51966d9c9a7267fd22c60444dd09293
+  Building wheel for django-jet (setup.py): started
+  Building wheel for django-jet (setup.py): finished with status 'done'
+  Created wheel for django-jet: filename=django_jet-1.0.8-py3-none-any.whl size=1079359 sha256=f055f38141e00c3609af5090177b16348d825e9f1a560c864df87234f042ea82
+  Stored in directory: /root/.cache/pip/wheels/62/68/e9/fc958c2c509a9917ca9687273347ad2c220921d5b4c37c168c
+  Building wheel for psycopg2 (setup.py): started
+  Building wheel for psycopg2 (setup.py): still running...
+  Building wheel for psycopg2 (setup.py): finished with status 'done'
+  Created wheel for psycopg2: filename=psycopg2-2.8.4-cp38-cp38-linux_x86_64.whl size=448387 sha256=44df254257d9f651cb33c13303a7a2553215e51c1011a0923df3c6807602ac50
+  Stored in directory: /root/.cache/pip/wheels/ac/07/3e/87adc95a2be1ee727bc54f487ce874bd6765ec9f206effb0df
+  Building wheel for markuppy (setup.py): started
+  Building wheel for markuppy (setup.py): finished with status 'done'
+  Created wheel for markuppy: filename=MarkupPy-1.14-py3-none-any.whl size=7415 sha256=b67efd1e2413299436e65b8df607b7f3f6c43a4571ae72ab2820df3b8e2a40e4
+  Stored in directory: /root/.cache/pip/wheels/95/13/60/31c9d5f4cd012e491aeac154ef8b0ec964916523623eb02f0b
+  Building wheel for odfpy (setup.py): started
+  Building wheel for odfpy (setup.py): finished with status 'done'
+  Created wheel for odfpy: filename=odfpy-1.4.1-py2.py3-none-any.whl size=160692 sha256=b6334b2c41a9349843c03636e63fdb48afb082f778abec9eaffe865d8918d66e
+  Stored in directory: /root/.cache/pip/wheels/ea/af/da/2bdd7308f7b334429a558df1e36d31864cd19c07ede92ddf0e
+Successfully built django-flat-responsive django-flat-theme django-jet psycopg2 markuppy odfpy
+Installing collected packages: xlwt, pytz, markuppy, django-suit, django-flat-theme, django-flat-responsive, zope.interface, xlrd, tablib, sqlparse, six, pyyaml, psycopg2, Pillow, gunicorn, et-xmlfile, django-crispy-forms, diff-match-patch, defusedxml, backports.zoneinfo, asgiref, openpyxl, odfpy, django-colorfield, Django, DateTime, django-phonenumber-field, django-multiselectfield, django-jet, django-admin-interface, django-import-export
+Successfully installed DateTime-4.4 Django-4.0.3 Pillow-7.0.0 asgiref-3.5.1 backports.zoneinfo-0.2.1 defusedxml-0.7.1 diff-match-patch-20200713 django-admin-interface-0.19.0 django-colorfield-0.6.3 django-crispy-forms-1.14.0 django-flat-responsive-2.0 django-flat-theme-1.1.4 django-import-export-2.8.0 django-jet-1.0.8 django-multiselectfield-0.1.12 django-phonenumber-field-6.1.0 django-suit-0.2.28 et-xmlfile-1.1.0 gunicorn-20.1.0 markuppy-1.14 odfpy-1.4.1 openpyxl-3.0.9 psycopg2-2.8.4 pytz-2022.1 pyyaml-6.0 six-1.16.0 sqlparse-0.4.2 tablib-3.2.1 xlrd-2.0.1 xlwt-1.3.0 zope.interface-5.4.0
+WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv
+Removing intermediate container f1569248f7f9
+ ---> 60a785b2a386
+Step 7/7 : CMD ["gunicorn", "-c", "config/gunicorn/conf.py", "--blind", ":8000", "--chdir", "Albergue_mascotas", "Albergue_mascotas.wsgi:application"]
+ ---> Running in fa92edf53848
+Removing intermediate container fa92edf53848
+ ---> c1322032c1a0
+Successfully built c1322032c1a0
+Successfully tagged albergue_mascotas_django_app:latest
+Pulling nginx (nginx:1.18.0)...
+1.18.0: Pulling from library/nginx
+f7ec5a41d630: Pull complete
+0b20d28b5eb3: Pull complete
+1576642c9776: Pull complete
+c12a848bad84: Pull complete
+03f221d9cf00: Pull complete
+Digest: sha256:e90ac5331fe095cea01b121a3627174b2e33e06e83720e9a934c7b8ccc9c55a0
+Status: Downloaded newer image for nginx:1.18.0
+Creating albergue_mascotas_db_postgress_1 ... done
+Creating albergue_mascotas_nginx_1        ... done
+Creating albergue_mascotas_django_app_1   ... done
+Attaching to albergue_mascotas_nginx_1, albergue_mascotas_db_postgress_1, albergue_mascotas_django_app_1
+db_postgress_1  | 
+db_postgress_1  | PostgreSQL Database directory appears to contain a database; Skipping initialization
+db_postgress_1  | 
+db_postgress_1  | 2022-05-06 01:51:09.940 UTC [1] LOG:  starting PostgreSQL 12.9 (Debian 12.9-1.pgdg110+1) on x86_64-pc-linux-gnu, compiled by gcc (Debian 10.2.1-6) 10.2.1 20210110, 64-bit
+db_postgress_1  | 2022-05-06 01:51:09.959 UTC [1] LOG:  listening on IPv4 address "0.0.0.0", port 5432
+db_postgress_1  | 2022-05-06 01:51:09.959 UTC [1] LOG:  listening on IPv6 address "::", port 5432
+db_postgress_1  | 2022-05-06 01:51:11.401 UTC [1] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+db_postgress_1  | 2022-05-06 01:51:18.222 UTC [28] LOG:  database system was interrupted; last known up at 2022-05-04 00:02:31 UTC
+nginx_1         | /docker-entrypoint.sh: /docker-entrypoint.d/ is not empty, will attempt to perform configuration
+nginx_1         | /docker-entrypoint.sh: Looking for shell scripts in /docker-entrypoint.d/
+nginx_1         | /docker-entrypoint.sh: Launching /docker-entrypoint.d/10-listen-on-ipv6-by-default.sh
+nginx_1         | 10-listen-on-ipv6-by-default.sh: error: /etc/nginx/conf.d/default.conf is not a file or does not exist
+nginx_1         | /docker-entrypoint.sh: Launching /docker-entrypoint.d/20-envsubst-on-templates.sh
+nginx_1         | /docker-entrypoint.sh: Configuration complete; ready for start up
+nginx_1         | 2022/05/06 01:50:32 [emerg] 1#1: unexpected "}" in /etc/nginx/conf.d/local.conf:3
+nginx_1         | nginx: [emerg] unexpected "}" in /etc/nginx/conf.d/local.conf:3
+albergue_mascotas_nginx_1 exited with code 1
+django_app_1    | usage: gunicorn [OPTIONS] [APP_MODULE]
+django_app_1    | gunicorn: error: unrecognized arguments: --blind Albergue_mascotas.wsgi:application
+albergue_mascotas_django_app_1 exited with code 2
+db_postgress_1  | 2022-05-06 01:52:05.702 UTC [28] LOG:  database system was not properly shut down; automatic recovery in progress
+db_postgress_1  | 2022-05-06 01:52:05.868 UTC [28] LOG:  redo starts at 0/164E940
+db_postgress_1  | 2022-05-06 01:52:05.868 UTC [28] LOG:  invalid record length at 0/164E978: wanted 24, got 0
+db_postgress_1  | 2022-05-06 01:52:05.868 UTC [28] LOG:  redo done at 0/164E940
+db_postgress_1  | 2022-05-06 01:52:07.856 UTC [1] LOG:  database system is ready to accept connections
+

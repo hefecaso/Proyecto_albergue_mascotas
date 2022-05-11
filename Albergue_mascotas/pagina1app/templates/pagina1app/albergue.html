@@ -3,45 +3,50 @@
 {% extends "pagina1app/base.html" %} {% load static %} {% block content %}
 
 <header
+
   style="background-color: white;"
   <meta
   http-equiv="content-type"
   content="text/html; charset=windows-1252">
-  <h2>¡Adoptanos!</h2>
+  <br>
+  <h1 style="text-align:center;">¡Adoptanos!</h1>
+  <br>
+  <hr>
 
-  <div class="registro">
-    {% for p in registro %}
-
-    <div class="Registro_mascota">
-      <div class="contenedor_registro">
+  <div class="container-fluid">
+    <div class="row">
+      {% for p in registro %}
         {% if p.foto_mascota %}
 
-        <img
-          alt="foto_mascota"
-          src="{{ p.foto_mascota.url }}"
-          height="30%"/>
-        <!-- <img src="{{ p.foto_mascota.url }}" alt="foto_mascota" width="20%" height="20%"> -->
+          <div class="col-md-3">
+            <div class="card" style="width: 18rem;">
+              <img  alt="foto_mascota" src="{{ p.foto_mascota.url }}" height="30%"/>
+              <hr>
+              <div class="card-body">
+                <h5 class="card-title">Nombre: {{ p.nombre_mascota | capfirst }}</h5>
+
+                <p class="card-text">
+                  Raza: {{ p.raza_mascota | capfirst }}
+                  <br>
+                  ID de la mascota: {{ p.id_mascota}}
+                </p>
+
+                {% if user.is_authenticated %}
+                  <a href="{% url 'Formulario adopcion' %}" class="btn btn-primary">Adoptar</a>
+                {% endif %}
+                
+              </div>
+            </div>
+          </div>
 
         {% endif %}
-
-        <div class="informacion">
-          ID de la mascota:
-
-          <h5>{{ p.id_mascota}}</h5>
-
-          Nombre:
-
-          <h5>{{ p.nombre_mascota | capfirst }}</h5>
-
-          Raza:
-
-          <h5>{{ p.raza_mascota | capfirst }}</h5>
-        </div>
-      </div>
+      {% endfor %}
     </div>
-
-    {% endfor %}
   </div>
+
+
+
+
 </header>
 
 {% endblock %}
