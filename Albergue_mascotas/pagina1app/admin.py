@@ -25,7 +25,7 @@ admin.site.unregister(Group)
 #admin.site.unregister(Temas)
 
 #Cambiando título de Djadmin
-admin.site.site_header = "Puppy Heroe - Admin dashboard"
+admin.site.site_header = "Puppy Hero - Admin dashboard"
 
 '''
 #Creando configuración para exportar e importar documentos
